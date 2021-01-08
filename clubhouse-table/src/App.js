@@ -40,6 +40,7 @@ function App() {
                                 <img
                                     src={value + "?token=5ff521dc-81d8-42db-9910-08651e89b4be"}
                                     width={60}
+                                    alt={"No image present"}
                                 />
                         )
                     },
