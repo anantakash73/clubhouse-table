@@ -21,8 +21,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "..",'clubhouse-table/build')));
-app.use(cache('1 minutes'))
+app.use(express.static(path.join(__dirname, "..",'build')));
+app.use(cache('2 minutes'))
 
 
 app.use('/', indexRouter);
