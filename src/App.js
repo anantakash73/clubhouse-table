@@ -74,6 +74,10 @@ function App() {
                     {
                         Header: "Active",
                         accessor: "active"
+                    },
+                    {
+                        Header: "Created at",
+                        accessor: "created"
                     }
                 ]
             },

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var axios = require('axios')
-
+var moment = require('moment')
 
 
 async function getMemberNames() {
@@ -49,6 +49,8 @@ router.get('/', async function(req, res, next) {
             namesString += (index +1) + ". " + name + "\n"
         });
         const teamName = teams[project.team_id]
+        const createdAt = moment(project.created_at)
+
         result.push({
             "name" : project.name || "",
             "team" : teamName,
@@ -56,6 +58,7 @@ router.get('/', async function(req, res, next) {
             "followers" : project.follower_ids.length,
             "names" : namesString,
             "active" : ((project.archived === false) ? "✅" : "❌") || "",
+            "created" : createdAt.format("MM-DD-YYYY")
         })
 
         }

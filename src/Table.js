@@ -3,33 +3,6 @@ import {useTable, useFilters, useSortBy } from "react-table";
 import styled from "styled-components";
 
 const Styles = styled.div`
-  //padding: 1rem;
-  //
-  //table {
-  //  border-spacing: 0;
-  //  border: 1px solid black;
-  //
-  //  tr {
-  //    :last-child {
-  //      td {
-  //        border-bottom: 0;
-  //      }
-  //    }
-  //  }
-  //
-  //  th,
-  //  td {
-  //    margin: 0;
-  //    padding: 0.5rem;
-  //    border-bottom: 1px solid black;
-  //    border-right: 1px solid black;
-  //    position: relative;
-  //
-  //    :last-child {
-  //      border-right: 0;
-  //    }
-  //  }
-
     /* My New CSS for Tooltip */
     .new-tooltip span {
       visibility: hidden;
@@ -50,7 +23,6 @@ const Styles = styled.div`
     .new-tooltip:hover span {
       visibility: visible;
     }
-  }
 `;
 
 export default function Table({ columns, data}) {
