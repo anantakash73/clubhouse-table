@@ -4,7 +4,7 @@ var axios = require('axios')
 
 
 
-async function getMembers(listId) {
+async function getMemberNames() {
     let members = {}
         const name = await axios.get("https://api.clubhouse.io/api/v3/members", {
             headers: {
@@ -15,12 +15,12 @@ async function getMembers(listId) {
                 members[member.id] = member.profile.name
             })
         })
-        return listId.map(id => members[id])
+        return members
 }
 
-async function getTeam(teamId){
+async function getTeam(){
     let teams = {}
-    const name = await axios.get("https://api.clubhouse.io/api/v3/teams", {
+    const names = await axios.get("https://api.clubhouse.io/api/v3/teams", {
         headers: {
             'Clubhouse-Token': process.env.CLUBHOUSE_API_TOKEN
         }
@@ -29,7 +29,7 @@ async function getTeam(teamId){
             teams[team.id] = team.name
         })
     })
-    return teams[teamId]
+    return teams
 }
 
 router.get('/', async function(req, res, next) {
@@ -40,16 +40,18 @@ router.get('/', async function(req, res, next) {
         }
     }).then(response => response.data)
     let result = []
+    const teams = await getTeam()
+    const members = await getMemberNames()
     for (const project of projects) {
-        const names = await getMembers(project.follower_ids)
+        const memberNames = project.follower_ids.map(id => members[id])
         let namesString = ""
-        names.map((name, index) => {
+        memberNames.map((name, index) => {
             namesString += (index +1) + ". " + name + "\n"
         });
-        const team = await getTeam(project.team_id)
+        const teamName = teams[project.team_id]
         result.push({
             "name" : project.name || "",
-            "team" : team,
+            "team" : teamName,
             "stories" : project.stats.num_stories || "",
             "followers" : project.follower_ids.length,
             "names" : namesString,
